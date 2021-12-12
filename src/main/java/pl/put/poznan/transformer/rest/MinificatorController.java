@@ -1,4 +1,5 @@
 package pl.put.poznan.transformer.rest;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
@@ -19,8 +20,16 @@ public class MinificatorController {
         logger.debug(reqJson);
 //        logger.debug(userJson);
 
-        Minificator minificator = new Minificator();
-        return minificator.minify(reqJson);
+        try{
+            Minificator minificator = new Minificator();
+            return minificator.minify(reqJson);
+        }
+        catch (
+            JsonProcessingException e){
+            System.out.println(e.toString());
+            return "Invalid JSON: " + reqJson;
+        }
+
     }
 
 
