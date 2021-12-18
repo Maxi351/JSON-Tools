@@ -19,6 +19,17 @@ class MinificatorTest {
         String newJson = minificator.minify("{\"Hello\": \"REST\"  }");
         assertEquals("{\"Hello\":\"REST\"}", newJson);
     }
+    
+    @Test
+    void testMinifyValidMultipleLines() throws JsonProcessingException {
+        String newJson = minificator.minify("{\n" +
+                "\n" +
+                "  \"Param1\"   : \"Text1\",\n" +
+                "        \"Param2\":         \"Tekst2\",\n" +
+                "\"Param3\"    :    \"Tekst3\"  \n" +
+                "        }");
+        assertEquals("{\"Param1\":\"Text1\",\"Param2\":\"Tekst2\",\"Param3\":\"Tekst3\"}", newJson);
+    }
 
     @Test
     void testMinifyInvalid() {

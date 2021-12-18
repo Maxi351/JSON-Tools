@@ -6,44 +6,26 @@ import org.springframework.web.bind.annotation.*;
 import pl.put.poznan.transformer.logic.Minificator;
 
 @RestController
-@RequestMapping("/minify/{reqJson}")
+@RequestMapping("/minify")
 public class MinificatorController {
 
     private static final Logger logger = LoggerFactory.getLogger(MinificatorController.class);
 
-    @RequestMapping(method = RequestMethod.GET, produces = "application/json")
-    public String get(@PathVariable String reqJson){
-        //, @RequestParam(value="userJson", defaultValue="{     \"Hello\": \"world  \"}") String userJson
-        // localhost:8080/minify/reqJson?userJson=tu jest userJson
+    @RequestMapping(method = RequestMethod.POST, produces = "application/json")
+    public String post(@RequestBody String userJson) {
+        System.out.println("POST");
 
         // log the parameters
-        logger.debug(reqJson);
-//        logger.debug(userJson);
+        logger.debug(userJson);
 
         try{
             Minificator minificator = new Minificator();
-            return minificator.minify(reqJson);
+            return minificator.minify(userJson);
         }
         catch (
             JsonProcessingException e){
             System.out.println(e.toString());
-            return "Invalid JSON: " + reqJson;
+            return "Invalid JSON: " + userJson;
         }
-
     }
-
-
-    /*
-    @RequestMapping(method = RequestMethod.POST, produces = "application/json")
-    public String post(@PathVariable String reqJson,
-                       @RequestBody String userJson) {
-
-        // log the parameters
-        logger.debug(reqJson);
-        logger.debug(userJson);
-
-        Minificator minificator = new Minificator();
-        return minificator.minify(userJson);
-    }
-    */
 }
