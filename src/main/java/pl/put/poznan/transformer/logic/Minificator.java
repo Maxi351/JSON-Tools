@@ -8,11 +8,12 @@ public class Minificator {
 
     public Minificator(){}
 
+    /** Minifies json
+     * @param userJson JSON to minify
+     * @return Minified JSON
+     * @throws JsonProcessingException If given Json is wrong
+     **/
     public String minify(String userJson) throws JsonProcessingException{
-        /** Minifies json
-         * @param userJson JSON to minify
-         * @return Minified JSON
-         **/
         System.out.println("Your JSON: \n" + userJson + "\n");
         ObjectMapper objectMapper = new ObjectMapper();
         JsonNode jsonNode = objectMapper.readValue(userJson, JsonNode.class);
