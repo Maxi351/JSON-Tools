@@ -5,7 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class File_comparator {
@@ -14,14 +14,14 @@ public class File_comparator {
 
         if(file1.size()<=s1)
         {
-            ArrayList<Character> pom = new ArrayList<Character>();
+            ArrayList<Character> pom = new ArrayList<>();
             for(int i=0;i<file2.size()-s2;i++)
                 pom.add('i');
             return pom;
         }
         if(file2.size()<=s2)
         {
-            ArrayList<Character> pom = new ArrayList<Character>();
+            ArrayList<Character> pom = new ArrayList<>();
             for(int i=0;i<file1.size()-s1;i++)
                 pom.add('d');
             return pom;
@@ -30,7 +30,7 @@ public class File_comparator {
 
 //        if(file1.get(s1)==file2.get(s2)) {
         if(file1.get(s1).equals(file2.get(s2))) {
-            ArrayList<Character> pom = new ArrayList<Character>();
+            ArrayList<Character> pom = new ArrayList<>();
             pom.add('c');
             pom.addAll(file_compare_rek(file1, file2, s1 + 1, s2 + 1));
 
@@ -38,9 +38,9 @@ public class File_comparator {
         }
         else
         {
-//            System.out.println("Jestem " + file1.get(s1) + " " + file2.get(s2));
-            ArrayList<Character> case1 = new ArrayList<Character>();
-            ArrayList<Character> case2 = new ArrayList<Character>();
+
+            ArrayList<Character> case1 = new ArrayList<>();
+            ArrayList<Character> case2 = new ArrayList<>();
 
             case1.add('d');
             case2.add('i');
@@ -64,7 +64,7 @@ public class File_comparator {
     {
         File my_file = new File(dir);
 
-        ArrayList<String> file_data = new ArrayList<String>();
+        ArrayList<String> file_data = new ArrayList<>();
         try {
             Scanner myReader = new Scanner(my_file);
 
@@ -72,6 +72,7 @@ public class File_comparator {
                 file_data.add(myReader.nextLine());
             }
         } catch (FileNotFoundException e) {
+            e.printStackTrace();
             throw e;
         }
 
@@ -95,6 +96,7 @@ public class File_comparator {
         }
         catch (FileNotFoundException e)
         {
+            e.printStackTrace();
             throw e;
         }
         return file_compare(file1,file2);
@@ -107,10 +109,10 @@ public class File_comparator {
         ArrayList<Character> diff;
 
         try{
-            diff = file_compare_dir(dir1,dir2);
-
             file1 = read_file(dir1);
             file2 = read_file(dir2);
+
+            diff = file_compare(file1,file2);
 
         }
         catch (FileNotFoundException e) {
@@ -150,10 +152,51 @@ public class File_comparator {
             myWriter.close();
             return liczba_tych_samych;
         } catch (IOException e) {
+            e.printStackTrace();
             return -1;
 //            System.out.println("Error");
-//            e.printStackTrace();
+
         }
+    }
+
+    public String merge_strings_lines(String f1,String f2)
+    {
+        ArrayList<String> file1 = new ArrayList<>(Arrays.asList(f1.split("\n")));
+        ArrayList<String> file2 = new ArrayList<>(Arrays.asList(f2.split("\n")));
+        ArrayList<Character> diff;
+
+
+        diff = file_compare(file1,file2);
+
+        String separator = ":";
+        String sign;
+        String output = "";
+
+        for(int i=0,s1=0,s2=0;i<diff.size();i++)
+        {
+            if(diff.get(i)=='c')
+            {
+                sign = " "+separator;
+                output += sign + file1.get(s1)+'\n';
+                s1++;
+                s2++;
+            }
+            else if(diff.get(i)=='d')
+            {
+                sign = "-" + separator;
+                output += sign + file1.get(s1)+'\n';
+                s1++;
+            }
+            else if(diff.get(i)=='i')
+            {
+                sign = "+" + separator;
+                output += sign + file2.get(s2)+'\n';
+                s2++;
+            }
+
+        }
+
+        return output;
     }
 
 }
