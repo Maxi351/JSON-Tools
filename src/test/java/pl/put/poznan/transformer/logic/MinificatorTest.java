@@ -36,4 +36,16 @@ class MinificatorTest {
         assertThrows(JsonProcessingException.class, ()->minificator.minify("{\"Hello\": \"REST  }"));
     }
 
+    @Test
+    void testMinifyEmpty() throws JsonProcessingException {
+        assertEquals("{}", minificator.minify("{}"));
+    }
+
+    @Test
+    void testMinifyWhitespaceOnly() throws JsonProcessingException {
+        String newJson = minificator.minify("{\n" +
+                "\n                    " +
+                "\t      \n}");
+        assertEquals("{}", newJson);
+    }
 }

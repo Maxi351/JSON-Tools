@@ -17,7 +17,7 @@ public class Minificator {
         System.out.println("Your JSON: \n" + userJson + "\n");
         ObjectMapper objectMapper = new ObjectMapper();
         JsonNode jsonNode = objectMapper.readValue(userJson, JsonNode.class);
-        System.out.println("Minified JSON: \n" + jsonNode.toString());
+        System.out.println("Minified JSON: \n" + jsonNode.toString()+ "\n");
         return jsonNode.toString();
     }
 }
