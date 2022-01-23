@@ -6,6 +6,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class Minificator {
 
+
+
     public Minificator(){}
 
     /** Minifies json

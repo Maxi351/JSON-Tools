@@ -8,12 +8,14 @@
         <outputRelativeToContentRoot value="true" />
         <module name="json-tools" />
         <module name="JSON-Tools" />
+        <module name="io-project-architecture" />
       </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="JSON-Tools" options="-parameters" />
+      <module name="io-project-architecture" options="-parameters" />
       <module name="json-tools" options="-parameters" />
     </option>
   </component>

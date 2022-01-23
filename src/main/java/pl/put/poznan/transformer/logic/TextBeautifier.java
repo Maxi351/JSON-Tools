@@ -15,12 +15,15 @@ public class TextBeautifier {
      * @throws JsonProcessingException If given Json is wrong
      **/
     public String Beautify(String userJson) throws JsonProcessingException{
+        String result = "";
+        if(userJson.isEmpty()) return result;
         System.out.println("Your JSON: \n" + userJson + "\n");
         ObjectMapper objectMapper = new ObjectMapper();
         JsonNode jsonNode = objectMapper.readValue(userJson, JsonNode.class);
-        String json = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(jsonNode);
-        System.out.println("Beautified JSON: \n" + json);
-        return json;
+        result = jsonNode.toPrettyString();
+        //String json = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(jsonNode);
+        System.out.println("Beautified JSON: \n" + result);
+        return result;
     }
 
 }
