@@ -28,4 +28,10 @@ public class TextBeautifier {
         return userJson;
     }
 
+    public String Beautify(String userJson) throws JsonProcessingException{
+        Node workingJson = new Node(userJson);
+        workingJson = Beautify(workingJson);
+        return workingJson.get();
+    }
+
 }
