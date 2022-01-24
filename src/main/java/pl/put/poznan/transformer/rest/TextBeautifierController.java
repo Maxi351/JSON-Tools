@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 import pl.put.poznan.transformer.logic.TextBeautifier;
+import pl.put.poznan.transformer.logic.Node;
 
 @RestController
 public class TextBeautifierController {
@@ -11,11 +12,11 @@ public class TextBeautifierController {
     private static final Logger logger = LoggerFactory.getLogger(TextBeautifierController.class);
 
     @GetMapping("/beautify")
-    public String post(@RequestParam(value = "userJson", defaultValue = "{\"name\":\"mkyong\",\"age\":38,\"skills\":[\"java\",\"python\",\"node\",\"kotlin\"]}") String userJson) {
+    public Object post(@RequestParam(value = "userJson", defaultValue = "{\"name\":\"mkyong\",\"age\":38,\"skills\":[\"java\",\"python\",\"node\",\"kotlin\"]}") Node userJson) {
         System.out.println("POST");
 
         // log the parameters
-        logger.debug(userJson);
+        logger.debug(userJson.get());
 
         try{
             TextBeautifier TB = new TextBeautifier();
@@ -23,7 +24,7 @@ public class TextBeautifierController {
         }
         catch (
                 JsonProcessingException e){
-            System.out.println(e.toString());
+            e.printStackTrace();
             return "Invalid JSON: " + userJson;
         }
     }

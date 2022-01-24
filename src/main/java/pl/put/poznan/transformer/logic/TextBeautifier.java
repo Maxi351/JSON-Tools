@@ -14,16 +14,18 @@ public class TextBeautifier {
      * @return Beautified JSON
      * @throws JsonProcessingException If given Json is wrong
      **/
-    public String Beautify(String userJson) throws JsonProcessingException{
-        String result = "";
-        if(userJson.isEmpty()) return result;
-        System.out.println("Your JSON: \n" + userJson + "\n");
+    public Node Beautify(Node userJson) throws JsonProcessingException{
+        String result;
+        String workingJson= userJson.get();
+        if(workingJson==null) workingJson="{}";
+        System.out.println("Your JSON: \n" + workingJson + "\n");
         ObjectMapper objectMapper = new ObjectMapper();
-        JsonNode jsonNode = objectMapper.readValue(userJson, JsonNode.class);
+        JsonNode jsonNode = objectMapper.readValue(workingJson, JsonNode.class);
         result = jsonNode.toPrettyString();
+        userJson.set(result);
         //String json = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(jsonNode);
         System.out.println("Beautified JSON: \n" + result);
-        return result;
+        return userJson;
     }
 
 }
