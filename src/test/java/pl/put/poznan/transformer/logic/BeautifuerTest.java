@@ -75,6 +75,7 @@ class BeautifierTest {
     @Test
     void testMockedString() throws  JsonProcessingException{
         Node workingJson  = mock(Node.class);
+        when(workingJson.get()).thenReturn("{\"Param1\":\"Text1\",\"Param2\":\"Tekst2\",\"Param3\":\"Tekst3\"}");
         Node newJson = TB.Beautify(workingJson);
         verify(workingJson).get();
         verify(workingJson).set(any(String.class));
