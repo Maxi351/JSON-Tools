@@ -22,26 +22,26 @@ class BeautifierTest {
         Node newJson = new Node("{\"Param1\":\"Text1\",\"Param2\":\"Tekst2\",\"Param3\":\"Tekst3\"}");
         newJson = TB.Beautify(newJson);
         String result = newJson.get();
-        assertEquals("{\r\n" +
-                "  \"Param1\" : \"Text1\",\r\n" +
-                "  \"Param2\" : \"Tekst2\",\r\n" +
-                "  \"Param3\" : \"Tekst3\"\r\n" +
+        assertEquals("{\n" +
+                "  \"Param1\" : \"Text1\",\n" +
+                "  \"Param2\" : \"Tekst2\",\n" +
+                "  \"Param3\" : \"Tekst3\"\n" +
                 "}", result);
     }
 
     @Test
     void testBeautifyAlreadyBeautified() throws JsonProcessingException {
-        Node newJson = new Node("{\r\n" +
-                "  \"Param1\" : \"Text1\",\r\n" +
-                "  \"Param2\" : \"Tekst2\",\r\n" +
-                "  \"Param3\" : \"Tekst3\"\r\n" +
+        Node newJson = new Node("{\n" +
+                "  \"Param1\" : \"Text1\",\n" +
+                "  \"Param2\" : \"Tekst2\",\n" +
+                "  \"Param3\" : \"Tekst3\"\n" +
                 "}");
         newJson = TB.Beautify(newJson);
         String result = newJson.get();
-        assertEquals("{\r\n" +
-                "  \"Param1\" : \"Text1\",\r\n" +
-                "  \"Param2\" : \"Tekst2\",\r\n" +
-                "  \"Param3\" : \"Tekst3\"\r\n" +
+        assertEquals("{\n" +
+                "  \"Param1\" : \"Text1\",\n" +
+                "  \"Param2\" : \"Tekst2\",\n" +
+                "  \"Param3\" : \"Tekst3\"\n" +
                 "}",result);
     }
 
@@ -64,11 +64,11 @@ class BeautifierTest {
     Node newJson = new Node("{\"pi\": \"3.14159265359\", \"e\": \"2.7182818284\", \"prime\": [2, 3, 5, 7, 11, 13, 17, 19], \"1+6\": 7}");
     newJson = TB.Beautify(newJson);
     String result = newJson.get();
-    assertEquals("{\r\n" +
-            "  \"pi\" : \"3.14159265359\",\r\n" +
-            "  \"e\" : \"2.7182818284\",\r\n" +
-            "  \"prime\" : [ 2, 3, 5, 7, 11, 13, 17, 19 ],\r\n" +
-            "  \"1+6\" : 7\r\n" +
+    assertEquals("{\n" +
+            "  \"pi\" : \"3.14159265359\",\n" +
+            "  \"e\" : \"2.7182818284\",\n" +
+            "  \"prime\" : [ 2, 3, 5, 7, 11, 13, 17, 19 ],\n" +
+            "  \"1+6\" : 7\n" +
             "}",result);
     }
 
